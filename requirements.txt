@@ -1,0 +1,6 @@
+Flask
+Flask-Session
+werkzeug.security
+Flask-SQLAlchemy
+flask-login
+os

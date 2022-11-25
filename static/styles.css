@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&family=Roboto:wght@400;500&display=swap');
+
+:root {
+/* Color Theme Swatches in RGBA */
+--primary-bg-color: rgba(20, 23, 28, 1);
+--secondary-bg-color: rgba(43, 52, 63, 1);
+--primary-text-color: rgb(255, 255, 255);
+--secondary-text-color: rgba(84, 102, 119, 1); 
+--primary-accent-color:  rgba(0, 175, 33, 1); 
+--secondary-accent-color: rgba(242, 116, 4, 1); 
+
+/* Fonts */
+--primary-font: "Roboto Slab", serif;
+--secondary-font: "Roboto", sans-serif;
+}
+
+* {
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color);
+}
+
+body {
+    font-family: var(--secondary-font);
+    font-weight: 400;
+    color: var(--secondary-text-color);
+}
+
