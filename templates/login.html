@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block head %} 
+    <link href="/static/forms.css" rel="stylesheet">
+    <script src="/static/forms.js"></script>
+{% endblock %}
+
+{% block title %}
+    Log in
+{% endblock %}
+
+{% block main %}
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="form p-5" id="container-form">
+            <h3 class="mb-4">LOG IN</h3>
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+
+                <!-- Display error -->
+                {% for message in get_flashed_messages() %}
+                <div class="alert alert-danger" role="alert">Error : {{ message }}</div>
+                {% endfor %}
+
+                <div class="mb-4 text-start">
+                    <label for="email">Email/ Username</label>
+                    <!-- Display email input field -->
+                    {{ form.name(class="form-control") }}
+                    <!-- Check for error -->
+                    {% for error in form.name.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="mb-4 text-start">
+                    <label for="password">Password</label>
+                    <!-- Display password input field -->
+                    {{ form.password(class="form-control") }}
+                    <!-- Check for error -->
+                    {% for error in form.password.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                
+                <div class="mt-4">
+                    <!-- Display login button -->
+                    {{ form.submit(class="btn btn-secondary") }}
+                </div>
+            </form>
+            
+            <p class="mt-3">Don't have an account? <a href="/templates/register.html">Register here</a>.</p>
+        </div>
+
+    </div>
+
+    
+{% endblock %}

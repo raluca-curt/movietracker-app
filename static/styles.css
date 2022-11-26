@@ -12,16 +12,43 @@
 /* Fonts */
 --primary-font: "Roboto Slab", serif;
 --secondary-font: "Roboto", sans-serif;
+
+--bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 * {
-    background-color: var(--primary-bg-color);
+    
     color: var(--primary-text-color);
+}
+
+html {
+    min-height: 100vh;
 }
 
 body {
     font-family: var(--secondary-font);
     font-weight: 400;
-    color: var(--secondary-text-color);
+    background-color: var(--primary-bg-color);
 }
 
+main {
+    min-height: 100vh;
+}
+
+a,
+a.nav-link {
+    color: var(--primary-text-color);
+}
+
+a:hover,
+a.nav-link:hover {
+    color: var(--secondary-accent-color)
+}
+
+.navbar-toggler {
+    background-color: var(--primary-text-color);
+}
+
+.navbar-toggler-icon {
+    background-image: var(--bs-navbar-toggler-icon-bg);
+}

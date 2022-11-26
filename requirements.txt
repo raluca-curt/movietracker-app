@@ -4,3 +4,5 @@ werkzeug.security
 Flask-SQLAlchemy
 flask-login
 os
+flask_wtf
+email_validator

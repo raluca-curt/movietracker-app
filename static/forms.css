@@ -1,0 +1,47 @@
+#main {
+    width: 100%;
+  
+}
+
+#container-form {
+    background-color: var(--secondary-bg-color);
+    opacity: .95;
+    border-radius: .6rem;
+    min-width: 30vw;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+form,
+form div {
+    background-color: var(--secondary-bg-color);
+}
+
+/* Inputs */
+.form-control {
+    background-color: var(--secondary-text-color);
+    border-color: var(--secondary-text-color);
+    width:100%;
+    padding: .7rem .3rem;
+}
+
+div label {
+    background-color: none;
+}
+
+.btn {
+    background-color: var(--primary-accent-color);
+    padding: 1rem 2rem;
+    border: none;
+}
+
+.btn:hover,
+.btn:active {
+    background-color: var(--secondary-accent-color);
+    border: none;
+}
+
+main {
+    background: url(/static/images/5.jpg), rgba(43, 52, 63, 0.8);
+    background-size: cover;
+    background-blend-mode: multiply;
+}
