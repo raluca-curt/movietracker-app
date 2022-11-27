@@ -5,5 +5,32 @@
 {% endblock %}
 
 {% block main %}
-    Hello
+    <div class="container-fluid" id="hero">
+        <div class="container-fluid position-absolute top-50 start-50 translate-middle" id="hero-image"></div>
+
+        <div class="container-fluid position-absolute bottom-0 start-50 translate-middle-x" id="hero-title">
+            <p class="h1">Praesent vitae turpis.</p>
+            <p class="h1">Maecenas in quam lacus.</p>
+            <p class="h1">Cras felis metus.</p>
+            <button type="button" class="btn btn-primary my-5" ><a href="/register">Register Now</a></button>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-5" id="content">
+        <p class="h5 mb-4">The social network for film lovers.</p>
+        <div class="list-group list-group-horizontal-md">
+            <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" aria-current="true">
+                <i class="bi bi-eye"></i>
+                <p class="mb-1 ms-3 text-start">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id mi convallis</p>
+            </div>
+            <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" aria-current="true">
+                <i class="bi bi-bookmark-heart"></i>
+                <p class="mb-1 ms-3 text-start">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id mi convallis</p>
+            </div>
+            <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" aria-current="true">
+                <i class="bi bi-star"></i>
+                <p class="mb-1 ms-3 text-start">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id mi convallis</p>
+            </div>
+          </div>
+    </div>
 {% endblock %}

@@ -6,22 +6,11 @@ import os
 from flask_login import LoginManager, UserMixin, login_user, current_user, login_required, logout_user
 from forms import Register, Login
 
+
 app = Flask(__name__)
 
 # Ensure templates are auto-reloaded
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-
-# Set API key
-api_key = '5aa61ad0'
-
-# @app.after_request
-# def after_request(response):
-#     # Ensure responses aren't cached
-#     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-#     response.headers['Expires'] = 0
-#     response.headers['Pragma'] = 'no-cache'
-#     return response
-# # # # End
 
 # Set up SQLite databse with SQLAlchemy
 file_path = os.path.abspath(os.getcwd())+'/users.db'

@@ -38,6 +38,8 @@ main {
 a,
 a.nav-link {
     color: var(--primary-text-color);
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 a:hover,
@@ -51,4 +53,111 @@ a.nav-link:hover {
 
 .navbar-toggler-icon {
     background-image: var(--bs-navbar-toggler-icon-bg);
+}
+
+.navbar {
+    padding-top: 1rem;
+    background-color: transparent;
+}
+
+/* Search bar */
+#search {
+    height: 2rem;
+    opacity: .8;
+    max-width: 13rem;
+}
+
+#search .btn {
+    padding: .375rem .75rem;
+    background-color: var(--secondary-bg-color);
+}
+
+.form-control {
+    background-color: var(--secondary-text-color);
+    border-color: var(--secondary-text-color);
+    
+}
+
+.btn i {
+    font-size: 1rem;
+}
+/* End search bar */
+
+/* Homepage */
+#hero {
+    height: 80vh;
+    width: 100%;
+}
+
+#hero-image {
+    max-width: 100%;
+    height: 100vh;
+    background: url('/static/images/4.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: 0 -10rem 25rem 16rem var(--primary-bg-color) inset;
+    z-index: -1;
+}
+
+#hero-title {
+    font-family: var(--primary-font);
+}
+
+#hero-title p {
+    margin-bottom: 0;
+}
+
+.btn {
+        background-color: var(--secondary-accent-color);
+        padding: .8rem 2rem;
+        border: none;
+        letter-spacing: .1rem;
+        text-transform: uppercase
+}
+    
+.btn:hover,
+.btn:active,
+.btn:focus {
+        background-color: var(--primary-accent-color);
+        border: none;
+}
+
+.btn a,
+.btn a:hover {
+    text-decoration: none;
+    color: var(--primary-text-color);
+}
+
+#content {
+    max-width: 996px;
+}
+
+i {
+    font-size: 3rem;
+}
+
+.list-group-item {
+    background-color: var(--secondary-bg-color);
+}
+.list-group-item:hover,
+.list-group-item:focus {
+    background-color: var(--primary-accent-color);
+}
+
+@media(max-width: 996px) {
+    #hero-title {
+        top: 30% !important;
+    }
+}
+
+@media(max-width: 992px) {
+    #hero {
+        height: 60vh;
+    }
+    #hero-image {
+        box-shadow: 0 -10rem 10rem 3rem var(--primary-bg-color) inset;
+        background: url('/static/images/4.jpg'), var(--primary-bg-color);
+        background-size: cover;
+        background-blend-mode: overlay;
+    }
 }
