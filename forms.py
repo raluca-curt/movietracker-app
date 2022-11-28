@@ -4,7 +4,7 @@ from wtforms.validators import InputRequired, Email, Length, EqualTo
 
 
 # Create class for register
-class Register(FlaskForm):
+class RegisterForm(FlaskForm):
     # Get each field in form and validate it
     username = StringField('Username', validators=[InputRequired()])
     email = StringField('Email', validators=[InputRequired(), Email()])
@@ -14,8 +14,17 @@ class Register(FlaskForm):
 
 
 # Create class for login
-class Login(FlaskForm):
+class LoginForm(FlaskForm):
     # Get each field in form and validate it
     name = StringField('name', validators=[InputRequired()])
     password = PasswordField('Password', validators=[InputRequired(), Length(min=12)])
     submit = SubmitField('Login')
+
+
+#Create class for search
+class SearchForm(FlaskForm):
+    # class Meta:
+    #     csrf = False
+        
+    searched = StringField('Searched', validators=[InputRequired()])
+    submit = SubmitField('Search')

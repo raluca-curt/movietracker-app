@@ -6,4 +6,9 @@ flask-login
 os
 flask_wtf
 email_validator
-bootstrap-icons 
+bootstrap-icons
+
+# API_KEY
+from settings import API_KEY
+os.path
+dotenv

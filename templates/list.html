@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+    
+{% block main %}
+
+    {% if movies['Response'] == "True" %}
+        <h1>Top results matching your search</h1>
+        <ul>
+        {% for movie in movies['Search'] %}
+            <li><a href="{{ url_for('search', title=title) }}">{{ movie }}</a></li>
+        {% endfor %}
+        </ul>
+       
+    {% else %}
+        <h1>No Results</h1>
+        <p>Please try again</p>
+    {% endif %}
+
+{% endblock %}

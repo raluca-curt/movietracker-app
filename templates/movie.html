@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+    
+{% block main %}
+<h1>you searched</h1>
+
+    {% if movie %}
+        <p>{{ movie }}</p>
+
+    {% else %}
+        <h2>no</h2>
+    {% endif %}
+
+{% endblock %}

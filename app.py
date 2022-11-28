@@ -1,11 +1,14 @@
-from flask import Flask, render_template, request, flash, redirect
+from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_login import LoginManager, UserMixin, login_user, current_user, login_required, logout_user
-from forms import Register, Login
+from forms import RegisterForm, LoginForm, SearchForm
 
+# Helper .py files
+from settings import API_KEY
+from helper import lookup
 
 app = Flask(__name__)
 
@@ -27,6 +30,7 @@ app.config['SECRET_KEY'] = SECRET_KEY
 # Set up login manager
 login_manager = LoginManager()
 login_manager.init_app(app)
+
 
 # Set up user class with details about registered users
 class User(UserMixin, db_users.Model):
@@ -51,17 +55,46 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
+# Pass stuff to navbar
+@app.context_processor
+def layout():
+    form = SearchForm()
+    return dict(form_searched=form)
+
+
 # Homepage
 @app.route('/')
 def index():
-    return render_template('index.html')
+    movie = lookup("search", 'Batman')
+    return render_template('index.html', movie=movie)
+
+
+# List all movies matching the search
+@app.route('/list', methods=['POST', 'GET'])
+def list():
+    form = SearchForm()
+    if form.validate_on_submit():
+        title = form.searched.data
+        movies = lookup("list", title)
+        return render_template("list.html", form_searched=form, movies=movies, title=title)
+
+    # Else search is not successful
+    movies = None
+    return render_template("list.html", movies=movies)
+
+
+# Unique page for each movie
+@app.route('/movie/<title>')
+def search(title):
+    movie = lookup('search', title)
+    return render_template('movie.html', movie=movie)
 
 
 # Register page
 @app.route('/register', methods = ['POST','GET'])
 def register():
     # Get data from register form
-    form = Register()
+    form = RegisterForm()
     if form.validate_on_submit():
         # Create new user
         user = User(username=form.username.data, email=form.email.data)
@@ -82,7 +115,7 @@ def register():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     # Get data from login form
-    form = Login()
+    form = LoginForm()
 
     if form.validate_on_submit():
         # Check if input matches an email from db_users

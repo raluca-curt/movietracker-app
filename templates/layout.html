@@ -33,9 +33,15 @@
                     <div class="collapse navbar-collapse" id="navbar">
                             <ul class="navbar-nav me-auto mt-2 align-items-center">
                                 <!-- <li class="nav-item"><a class="nav-link" href="/">Home</a></li> -->
-                                <form class="d-flex" id="search">
-                                    <input class="form-control me-2" type="search" aria-label="Search">
-                                    <button class="btn btn-primary text-center" type="submit"><i class="bi bi-search"></i></button>
+                                <form action="{{ url_for('list') }}" method="post" class="d-flex" id="search">
+                                    {{ form_searched.hidden_tag() }}
+                                    <div class="">
+                                        {{ form_searched.searched(class="form-control") }}
+                                    </div>
+                                    <!-- Display register button -->
+                                    <div class="">
+                                    {{ form_searched.submit(class="btn btn-secondary text-center") }}
+                                    </div>
                                 </form>
                             </ul>
                             
