@@ -23,8 +23,5 @@ class LoginForm(FlaskForm):
 
 #Create class for search
 class SearchForm(FlaskForm):
-    # class Meta:
-    #     csrf = False
-        
     searched = StringField('Searched', validators=[InputRequired()])
     submit = SubmitField('Search')

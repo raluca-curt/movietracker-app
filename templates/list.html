@@ -5,18 +5,34 @@
 {% endblock %}
     
 {% block main %}
-
+<div class="container-fluid mx-auto" id="content">
+    
     {% if movies['Response'] == "True" %}
-        <h1>Top results matching your search</h1>
-        <ul>
+    <p class="h1">Top results matching your search</p>
+    <hr>
+    <div class="container-fluid d-flex flex-row flex-wrap mt-5 ms-auto" id="cards">
         {% for movie in movies['Search'] %}
-            <li><a href="{{ url_for('search', title=title) }}">{{ movie }}</a></li>
+            <div class="card d-flex me-2 mb-4">
+                {% if movie['Poster'] == 'N/A' %}
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie-poster-placeholder">
+                {% else %}
+                    <img src="{{ movie['Poster'] }}" class="card-img-top" alt="movie-poster">
+                {% endif %}
+                <a href="{{ url_for('search', title=movie['Title']) }}">
+                    <div class="card-body">
+                        <a href="{{ url_for('search', title=movie['Title']) }}"><h5 class="card-title">{{ movie['Title'] }}</h5></a>
+                        <p class="card-text">Year: {{ movie['Year'] }}</p>
+                    </div>
+                </a>
+            </div>
         {% endfor %}
-        </ul>
+
        
     {% else %}
         <h1>No Results</h1>
         <p>Please try again</p>
     {% endif %}
+    </div>
+</div>
 
 {% endblock %}

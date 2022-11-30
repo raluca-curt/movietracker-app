@@ -64,12 +64,18 @@ a.nav-link:hover {
 #search {
     height: 2rem;
     opacity: .8;
-    max-width: 13rem;
+    max-width: 9rem;
 }
 
 #search .btn {
     padding: .375rem .75rem;
+    width: 2rem;
     background-color: var(--secondary-bg-color);
+    
+}
+
+#search .bi {
+    width: 1rem;
 }
 
 .form-control {
@@ -129,7 +135,7 @@ a.nav-link:hover {
 }
 
 #content {
-    max-width: 996px;
+    max-width: 1280px;
 }
 
 i {
@@ -159,5 +165,38 @@ i {
         background: url('/static/images/4.jpg'), var(--primary-bg-color);
         background-size: cover;
         background-blend-mode: overlay;
+    }
+}
+
+/* List */
+#cards {
+    max-width: 100%;
+    justify-content: space-around;
+}
+
+
+.card {
+    background-color: var(--secondary-bg-color);
+    width: 14rem;
+}
+
+.card-title {
+    min-height: 3.5rem;
+    border-radius: .2rem;
+}
+
+.card-title:hover {
+    background-color: var(--secondary-accent-color);
+    transition: all .2s ease-in;
+    cursor: pointer;
+}
+
+.card-img-top {
+   height: 70%;
+}
+
+@media(max-width: 537px) {
+    #cards {
+        justify-content: center;
     }
 }
