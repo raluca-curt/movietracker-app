@@ -1,5 +1,9 @@
 import requests
 from settings import API_KEY
+from flask_sqlalchemy import SQLAlchemy 
+
+
+
 
 # Two types can be used
 def lookup(type, title):
@@ -34,7 +38,3 @@ def lookup(type, title):
             return None
 
 
-    
-
-# class Movie(movie):
-    # Lookup movie

@@ -200,3 +200,49 @@ i {
         justify-content: center;
     }
 }
+
+/* Movie page */
+#poster-col {
+    background-color: var(--secondary-bg-color);
+}
+
+/* If user is not logged in */
+#login-message {
+    background-color: var(--primary-accent-color);
+    border-radius: .2rem;
+    padding: .3rem .5rem;
+
+}
+
+#poster-col a {
+    text-decoration: none;
+}
+
+#poster-col a:hover {
+    color: var(--secondary-text-color);
+    text-decoration: none;
+}
+
+/* If user is logged in */
+#poster-col span {
+    background-color: transparent;
+    padding: 0;
+    width: 4.5rem;
+}
+
+#poster-col span .bi {
+    font-size: 2rem;
+} 
+#poster-col span .bi:hover {
+    cursor: pointer;
+} 
+
+#poster-col span p {
+    font-size: .8rem;
+    text-transform:capitalize;
+    font-family: var(--secondary-font);
+}
+
+#content-col {
+    background-color: gray;
+}

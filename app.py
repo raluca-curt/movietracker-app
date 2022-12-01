@@ -20,10 +20,10 @@ file_path = os.path.abspath(os.getcwd())+'/users.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+file_path
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db_users = SQLAlchemy(app)
+db = SQLAlchemy(app)
 
 
-# Set up secrete key for login
+# Set up secret key for login
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 
@@ -33,12 +33,12 @@ login_manager.init_app(app)
 
 
 # Set up user class with details about registered users
-class User(UserMixin, db_users.Model):
-    id = db_users.Column(db_users.Integer, primary_key=True, unique=True)
-    username = db_users.Column(db_users.String(50), index=True, unique=True)
-    email = db_users.Column(db_users.String(150), index = True, unique = True)
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    username = db.Column(db.String(50), index=True, unique=True)
+    email = db.Column(db.String(150), index = True, unique = True)
     # Only store a password hash
-    password_hash = db_users.Column(db_users.String(150))
+    password_hash = db.Column(db.String(150))
 
     # Get hash for password
     def set_password(self, password):
@@ -53,6 +53,19 @@ class User(UserMixin, db_users.Model):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
+
+
+# Set up class for user's interactions with movies
+class MovieInteraction(db.Model):
+    __tablename__ = 'interactions'
+
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    movie_id = db.Column(db.String)
+    watchlist = db.Column(db.Integer, default=0)
+    watched = db.Column(db.Integer, default=0)
+    liked = db.Column(db.Integer, default=0)
+
 
 
 # Pass stuff to navbar
@@ -87,11 +100,77 @@ def list():
 @app.route('/movie/<title>')
 def search(title):
     movie = lookup('search', title)
-    return render_template('movie.html', movie=movie)
+    watchlist = 0
+    watched = 0
+    liked = 0
+    if current_user.is_authenticated:
+        movie_id = movie['imdbID']
+
+        interaction = MovieInteraction.query.filter_by(user_id=current_user.id, movie_id=movie_id).first() 
+        if interaction is not None:
+            # Get the interaction status
+            watchlist = interaction.watchlist
+            watched = interaction.watched
+            liked = interaction.liked
+        
+    return render_template('movie.html', movie=movie, watchlist=watchlist, watched=watched, liked=liked)
+
+
+# Process interaction request
+@app.route('/process_interaction', methods=['POST'])
+def process_interaction():
+    if request.method == 'POST':
+        client_data = request.get_json()
+        
+        # Get movie id
+        movie_id = client_data['movie_id']
+  
+        # Get interaction type (watchlist, watched, liked) based on the key from client_data
+        interaction_type = client_data.keys()
+        # Get list of keys
+        interaction_type = [*interaction_type]
+
+
+        # Check if there is already an interaction by the current user with movie_id
+        interaction = MovieInteraction.query.filter_by(user_id=current_user.id, movie_id=movie_id).first()
+
+        if interaction is not None:
+            # Check the type of interaction from client (watchlist, watched, or liked)
+            if interaction_type[0] == 'watchlist':
+                interaction.watchlist = client_data['watchlist']
+            elif interaction_type[0] == 'watched':
+                interaction.watched = client_data['watched']
+                # Delete the movie id from watchlist once watched is on
+                # interaction.watchlist = 0
+            elif interaction_type[0] == 'liked':
+                interaction.liked = client_data['liked']
+            db.session.commit()
+
+            # If all interactions are zero delete the row
+            if interaction.watchlist == 0 and interaction.watched == 0 and interaction.liked == 0:
+                interaction.delete()
+                db.session.commit()
+
+        elif interaction is None:
+            new_interaction = MovieInteraction(user_id=current_user.id, movie_id=movie_id) # The watchlist, watched, and liked columns default to 0
+
+            if interaction_type[0] == 'watchlist':
+                new_interaction.watchlist = client_data['watchlist']
+            elif interaction_type[0] == 'watched':
+                new_interaction.watched = client_data['watched']
+            elif interaction_type[0] == 'liked':
+                new_interaction.liked = client_data['liked']
+
+            db.session.add(new_interaction)
+            db.session.commit()
+
+        return 'Success'
+    
+    return None
 
 
 # Register page
-@app.route('/register', methods = ['POST','GET'])
+@app.route('/register', methods=['POST','GET'])
 def register():
     # Get data from register form
     form = RegisterForm()
@@ -100,9 +179,9 @@ def register():
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
 
-        #  Add new user to db_users
-        db_users.session.add(user)
-        db_users.session.commit()
+        #  Add new user to db
+        db.session.add(user)
+        db.session.commit()
 
         # Redirect new user to login page
         return redirect('login.html')
@@ -118,21 +197,20 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        # Check if input matches an email from db_users
+        # Check if input matches an email from db
         user_email = User.query.filter_by(email=form.name.data).first()
         
-        # Check if input matches an email from db_users
+        # Check if input matches an email from db
         if user_email is not None:
             user = user_email
-        # Else input does not match an email from db_users, look for the username
+        # Else input does not match an email from db, look for the username
         else:
             user = User.query.filter_by(username=form.name.data).first()
             
         # If user exists and it matches the password, login user
         if user is not None and user.check_password(form.password.data):
             login_user(user)
-            next = request.args.get("next")
-            return redirect(next or '/')
+            return redirect('/')
 
         # If invalid email or password, flash error
         flash('Invalid email or password.')

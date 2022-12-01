@@ -1,17 +1,61 @@
 {% extends "layout.html" %}
 
+{% block head %} 
+    <script src="/static/interactions.js"></script>
+{% endblock %}
+
 {% block title %}
     Search
 {% endblock %}
     
 {% block main %}
-<h1>you searched</h1>
-
-    {% if movie %}
-        <p>{{ movie }}</p>
+<div class="container-fluid mx-auto" id="content">
+    {% if movie['Response'] == "True" %}
+    <div class="row">
+        <div class="col-sm-4 d-flex flex-column align-items-center" id="poster-col">
+            <img src="{{ movie['Poster'] }}" class="img-thumbnail" alt="movie-poster">
+            {% if current_user.is_authenticated %}
+                <div class="container-fluid mx-auto d-flex justify-content-evenly flex-wrap mt-3" id="interactions" data-filmid="{{ movie['imdbID'] }}">
+                    <span>
+                        {% if watchlist == 1 %}
+                            <i class="bi bi-stopwatch-fill -on" id="watchlist"></i>
+                        {% else %}
+                            <i class="bi bi-stopwatch" id="watchlist"></i>
+                        {% endif %}
+                        <p>Watchlist</p></span>
+                    <span>
+                        {% if watched == 1 %}
+                            <i class="bi bi-eye-fill -on" id="watched"></i>
+                        {% else %}
+                            <i class="bi bi-eye" id="watched"></i>
+                        {% endif %}
+                        <p>Watch</p></span>
+                    <span>
+                        {% if liked == 1 %}
+                        <i class="bi bi-heart-fill -on" id="liked"></i>
+                        {% else %}
+                        <i class="bi bi-heart" id="liked"></i>
+                        {% endif %}
+                        <p>Like</p></span>
+                </div>
+            {% else %} 
+                <div class="container-fluid mx-auto d-flex justify-content-evenly flex-wrap mt-3">
+                    <p id="login-message"><a href="{{ url_for('login') }}">Log in to review.</a></p>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-sm-8" id="content-col">col-sm-8</div>
+    </div>
+    
+        <!-- <h1>You searched for</h1>
+        <p>{{ movie }}</p> -->
 
     {% else %}
-        <h2>no</h2>
+        <h1>No Results</h1>
+        <p>Please try again</p>
     {% endif %}
+</div>
+
+
 
 {% endblock %}
