@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;600&family=Roboto:wght@400;500&display=swap');
 
 :root {
 /* Color Theme Swatches in RGBA */
 --primary-bg-color: rgba(20, 23, 28, 1);
 --secondary-bg-color: rgba(43, 52, 63, 1);
 --primary-text-color: rgb(255, 255, 255);
---secondary-text-color: rgba(84, 102, 119, 1); 
+--secondary-text-color: rgb(153, 170, 187);
 --primary-accent-color:  rgba(0, 175, 33, 1); 
 --secondary-accent-color: rgba(242, 116, 4, 1); 
 
@@ -171,13 +171,13 @@ i {
 /* List */
 #cards {
     max-width: 100%;
-    justify-content: space-around;
+    justify-content: start;
 }
-
 
 .card {
     background-color: var(--secondary-bg-color);
     width: 14rem;
+    margin-right: 1.25rem;
 }
 
 .card-title {
@@ -202,10 +202,6 @@ i {
 }
 
 /* Movie page */
-#poster-col {
-    background-color: var(--secondary-bg-color);
-}
-
 /* If user is not logged in */
 #login-message {
     background-color: var(--primary-accent-color);
@@ -243,6 +239,93 @@ i {
     font-family: var(--secondary-font);
 }
 
-#content-col {
-    background-color: gray;
+#content-col p {
+    /* background-color: gray; */
+    color: var(--secondary-text-color)
+    
+}
+
+#watched.-on  {
+    color: var(--primary-accent-color)
+}
+
+#liked.-on {
+    color: var(--secondary-accent-color)
+}
+
+#details p.h1 {
+    color: var(--primary-text-color)
+}
+
+#details p.h5 {
+    /* margin-top: 1.2rem; */
+    /* font-weight: 400; */
+    font-weight: 300;
+    font-family: var(--primary-font);
+}
+
+#plot p {
+    font-weight: 300;
+    font-family: var(--primary-font);
+}
+
+#ratings_title {
+    border-bottom: 1px solid var(--secondary-text-color);
+    text-transform: uppercase;
+    font-family: var(--secondary-font);
+}
+
+#ratings_source .bi {
+    font-size:1rem;
+    color: var(--primary-accent-color)
+}
+
+#ratings_source {
+    font-weight: 300;
+}
+
+#accordion {
+    width: 100%;
+}
+
+#accordion-item {
+    background-color: transparent;
+}
+
+.accordion-item {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--secondary-text-color);
+}
+
+.accordion-button {
+    background-color: transparent;
+    color: var(--secondary-text-color);
+    text-transform: uppercase;
+    font-size: 1.25rem;
+    padding-left: 0;
+}
+
+.accordion-body {
+    padding-left: 0;
+}
+
+.accordion-body span {
+    text-transform: uppercase;
+    margin-right: .5rem;
+}
+
+.accordion-button:after {
+    /* color: var(--primary-accent-color) */
+    content: none;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: transparent;
+    color: var(--primary-accent-color)
+}
+
+.accordion-button:focus {
+    border: none;
+    box-shadow: none;
 }

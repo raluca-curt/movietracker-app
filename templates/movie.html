@@ -29,7 +29,7 @@
                         {% else %}
                             <i class="bi bi-eye" id="watched"></i>
                         {% endif %}
-                        <p>Watch</p></span>
+                        <p>Watched</p></span>
                     <span>
                         {% if liked == 1 %}
                         <i class="bi bi-heart-fill -on" id="liked"></i>
@@ -40,15 +40,89 @@
                 </div>
             {% else %} 
                 <div class="container-fluid mx-auto d-flex justify-content-evenly flex-wrap mt-3">
-                    <p id="login-message"><a href="{{ url_for('login') }}">Log in to review.</a></p>
+                    <a href="{{ url_for('login') }}"><p id="login-message">Log in to review.</p></a>
                 </div>
             {% endif %}
         </div>
-        <div class="col-sm-8" id="content-col">col-sm-8</div>
+        <div class="col-sm-8" id="content-col">
+            <div class="container d-flex justify-content-start align-content-center flex-wrap" id="details">
+                <p class="h1 me-4">{{ movie['Title'] }}</p>
+                <span class="d-flex justify-content-start align-content-center flex-wrap">
+                  <p class="h5 me-4 mb-0 mt-1">{{ movie['Year'] }}</p>
+                  <p class="h5 mb-0 mt-1">Directed by {{ movie['Director'] }}</p>
+                </span>
+                
+            </div>
+            <!-- Plot -->
+            <div class="container d-flex justify-content-start align-content-center flex-wrap" id="plot">
+                <p class="h6 mt-4 text-start">{{ movie['Plot'] }}</p>
+            </div>
+            <!-- End plot -->
+            <!-- Ratings -->
+            <div class="container d-flex flex-column justify-content-center align-content-start flex-wrap text-start mt-4" id="ratings">
+                <p class="h5 pb-3" id="ratings_title">Ratings</p>
+                {% for rating in movie['Ratings'] %}
+                    <p class="h6 mt-2" id="ratings_source"><i class="bi bi-star-fill me-2 "></i>{{ rating['Source'] }}: {{ rating['Value'] }}</p>
+                {% endfor %}
+            </div>
+            <!-- End ratings -->
+            <!-- Start accordion -->
+            <div class="container d-flex justify-content-start align-content-center flex-wrap" id="accordion_container">
+              <div class="accordion d-flex flex-column mt-4" id="accordion">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Genres
+                      </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion">
+                      <div class="accordion-body text-start">
+                        <p class="mb-0">{{ movie['Genre'] }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Actors
+                      </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+                      <div class="accordion-body text-start">
+                        <p class="mb-0">{{ movie['Actors'] }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Details
+                      </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordion">
+                      <div class="accordion-body text-start">
+                        {% if movie['Runtime'] %}
+                        <p class="mb-0"><span>Runtime:</span> {{ movie['Runtime'] }}</p>
+                        {% endif %}
+
+                        {% if movie['Language'] %}
+                          <p class="mb-0"><span>Language:</span> {{ movie['Language'] }}</p>
+                        {% endif %}
+
+                        {% if movie['Country'] %}
+                        <p class="mb-0"><span>Country:</span> {{ movie['Country'] }}</p>
+                        {% endif %}
+
+                        {% if movie['Awards'] %}
+                        <p class="mb-0"><span>Awards:</span> {{ movie['Awards'] }}</p>
+                        {% endif %}                
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
     </div>
-    
-        <!-- <h1>You searched for</h1>
-        <p>{{ movie }}</p> -->
 
     {% else %}
         <h1>No Results</h1>

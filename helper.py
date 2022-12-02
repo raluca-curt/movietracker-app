@@ -10,7 +10,7 @@ def lookup(type, title):
     # Display a list of all movies with the same title
     if type == 'list':
         try:
-            response_raw = requests.get(f"http://www.omdbapi.com/?apikey={API_KEY}&s={title}")
+            response_raw = requests.get(f"http://www.omdbapi.com/?apikey={API_KEY}&s={title}&type=movie")
             
             response_raw.raise_for_status()
         except requests.exceptions.RequestException:

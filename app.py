@@ -210,7 +210,8 @@ def login():
         # If user exists and it matches the password, login user
         if user is not None and user.check_password(form.password.data):
             login_user(user)
-            return redirect('/')
+            next = request.args.get("next")
+            return redirect(next or '/')
 
         # If invalid email or password, flash error
         flash('Invalid email or password.')
