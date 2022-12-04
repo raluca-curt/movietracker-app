@@ -43,7 +43,9 @@ a.nav-link {
 }
 
 a:hover,
-a.nav-link:hover {
+a.nav-link:hover,
+a.nav-link:focus,
+a.nav-link:active {
     color: var(--secondary-accent-color)
 }
 
@@ -79,9 +81,9 @@ a.nav-link:hover {
 }
 
 .form-control {
-    background-color: var(--secondary-text-color);
+    background-color: var(--primary-text-color);
     border-color: var(--secondary-text-color);
-    
+    color: var(--secondary-text-color);
 }
 
 .btn i {
@@ -111,6 +113,11 @@ a.nav-link:hover {
 
 #hero-title p {
     margin-bottom: 0;
+    /* font-weight: 600; */
+}
+
+#hero-title .h1 {
+    font-weight: 600;
 }
 
 .btn {
@@ -171,13 +178,11 @@ i {
 /* List */
 #cards {
     max-width: 100%;
-    justify-content: start;
 }
 
 .card {
     background-color: var(--secondary-bg-color);
     width: 14rem;
-    margin-right: 1.25rem;
 }
 
 .card-title {
@@ -193,12 +198,6 @@ i {
 
 .card-img-top {
    height: 70%;
-}
-
-@media(max-width: 537px) {
-    #cards {
-        justify-content: center;
-    }
 }
 
 /* Movie page */
@@ -235,7 +234,7 @@ i {
 
 #poster-col span p {
     font-size: .8rem;
-    text-transform:capitalize;
+    text-transform: capitalize;
     font-family: var(--secondary-font);
 }
 
@@ -328,4 +327,22 @@ i {
 .accordion-button:focus {
     border: none;
     box-shadow: none;
+}
+
+/* Account */
+#account-card {
+    max-height: 9rem;
+    max-width: 6rem;
+    height: 100%;
+}
+
+.row .bi {
+    font-size: 1.2rem;
+}
+
+.row p {
+    text-transform: uppercase;
+    /* font-size: 1.2rem; */
+    font-weight: 300;
+    color: var(--secondary-text-color)
 }

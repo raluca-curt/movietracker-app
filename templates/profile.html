@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Watchlist
+{% endblock %}
+    <div class="container-fluid mx-auto" id="content">
+    
+    </div>
+{% block main %}
+<div class="container-fluid mx-auto" id="content">
+        <div class="container text-start">
+            <div class="row mt-4">
+                <div class="col p-0">
+                    {% if watchlist_length > 0 %}
+                        {% if watchlist_list_length == 1 %}
+                            <p class="h5 text-start"><i class="bi bi-stopwatch-fill -on" id="watchlist"></i> You want to see {{ watchlist_length }} movie</p>
+                        {% else %} 
+                            <p class="h5 text-start"><i class="bi bi-stopwatch-fill -on" id="watchlist"></i> You want to see {{ watchlist_length }} movies</p>
+                        {% endif %}
+                        <hr>
+                        <div class="container-fluid d-flex flex-row flex-wrap justify-content-start" id="cards">
+                            {% for movie in watchlist_list %}
+                                <a class="card d-flex mb-4 me-1" href="{{ url_for('search', title=movie['Title']) }}" id="account-card">
+                                    {% if movie['Poster'] == 'N/A' %}
+                                    <img src="https://via.placeholder.com/150"  alt="movie-poster-placeholder">
+                                    {% else %}
+                                        <img src="{{ movie['Poster'] }}" class="card-img-top" alt="movie-poster">
+                                    {% endif %}
+                                </a>
+                            {% endfor %}
+                    {% else %}
+                        <p class="h5 text-start"><i class="bi bi-stopwatch" id="watchlist"> </i><i class="bi bi-emoji-frown"></i> You don't have any movies on your watchlist</p>
+                        <hr>
+                    {% endif %}
+                </div>
+              </div>
+           
+
+            <!-- Start watched -->
+            <div class="row mt-4">
+                <div class="col p-0">
+                    {% if watched_list_length > 0 %}
+                        {% if watched_list_length == 1 %}
+                            <p class="h5 text-start"><i class="bi bi-eye-fill -on" id="watched"></i> You've watched {{ watched_list_length }} movie</p>
+                        {% else %} 
+                            <p class="h5 text-start"><i class="bi bi-eye-fill -on" id="watched"></i> You've watched {{ watched_list_length }} movies</p>
+                        {% endif %}
+                        <hr>
+                        <div class="container-fluid d-flex flex-row flex-wrap justify-content-start" id="cards">
+                            {% for movie in watched_list %}
+                                <a class="card d-flex mb-4 me-1" href="{{ url_for('search', title=movie['Title']) }}" id="account-card">
+                                    {% if movie['Poster'] == 'N/A' %}
+                                    <img src="https://via.placeholder.com/150"  alt="movie-poster-placeholder">
+                                    {% else %}
+                                        <img src="{{ movie['Poster'] }}" class="card-img-top" alt="movie-poster">
+                                    {% endif %}
+                                </a>
+                            {% endfor %}
+                    {% else %}
+                        <p class="h5 text-start"><i class="bi bi-eye" id="watched"></i> <i class="bi bi-emoji-frown"></i> You haven't watched any movies</p>
+                        <hr>
+                    {% endif %}
+                </div>
+              </div>
+            
+            <!-- End watched -->
+            <!-- Start liked -->
+            <div class="row mt-4">
+                <div class="col p-0">
+                    {% if liked_list_length > 0 %}
+                        {% if liked_list_length == 1 %}
+                            <p class="h5 text-start"><i class="bi bi-heart-fill -on" id="liked"></i> You've liked {{ watched_list_length }} movie</p>
+                        {% else %} 
+                            <p class="h3 text-start"><i class="bi bi-heart-fill -on" id="liked"></i> You've liked {{ watched_list_length }} movies</p>
+                        {% endif %}
+                        <hr>
+                        <div class="container-fluid d-flex flex-row flex-wrap justify-content-start" id="cards">
+                            {% for movie in liked_list %}
+                                <a class="card d-flex mb-4 me-1" href="{{ url_for('search', title=movie['Title']) }}" id="account-card">
+                                    {% if movie['Poster'] == 'N/A' %}
+                                    <img src="https://via.placeholder.com/150"  alt="movie-poster-placeholder">
+                                    {% else %}
+                                        <img src="{{ movie['Poster'] }}" class="card-img-top" alt="movie-poster">
+                                    {% endif %}
+                                </a>
+                            {% endfor %}
+                    {% else %}
+                        <p class="h5 text-start"><i class="bi bi-heart" id="liked"></i> <i class="bi bi-emoji-frown"></i> You haven't liked any movies</p>
+                        <hr>
+                    {% endif %}
+                </div>
+              </div>
+            
+            <!-- End liked -->
+        </div>
+    </div>
+</div>
+{% endblock %}

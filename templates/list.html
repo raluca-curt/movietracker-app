@@ -10,9 +10,9 @@
     {% if movies['Response'] == "True" %}
     <p class="h1">Top results matching your search</p>
     <hr>
-    <div class="container-fluid d-flex flex-row flex-wrap mt-5" id="cards">
+    <div class="container-fluid d-flex flex-row flex-wrap mt-5 justify-content-around" id="cards">
         {% for movie in movies['Search'] %}
-            <div class="card d-flex mb-4 mx-auto">
+            <div class="card d-flex mb-4 me-1">
                 {% if movie['Poster'] == 'N/A' %}
                     <img src="https://via.placeholder.com/150" class="card-img-top" alt="movie-poster-placeholder">
                 {% else %}

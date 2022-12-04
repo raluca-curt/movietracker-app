@@ -9,10 +9,14 @@
         <div class="container-fluid position-absolute top-50 start-50 translate-middle" id="hero-image"></div>
 
         <div class="container-fluid position-absolute bottom-0 start-50 translate-middle-x" id="hero-title">
-            <p class="h1">Praesent vitae turpis.</p>
-            <p class="h1">Maecenas in quam lacus.</p>
-            <p class="h1">Cras felis metus.</p>
-            <button type="button" class="btn btn-primary my-5" ><a href="/register">Register Now</a></button>
+                <p class="h1">Track movies you've watched.</p>
+                <p class="h1">Add them to your favorites.</p>
+                <p class="h1">Save the ones you want to see.</p>
+                {% if current_user.is_authenticated %}
+                    <button type="button" class="btn btn-primary my-5" ><a href="/profile">See profile</a></button>
+                {% else %}
+                    <button type="button" class="btn btn-primary my-5" ><a href="/register">Register Now</a></button>
+                {% endif %}
         </div>
     </div>
 
@@ -20,17 +24,18 @@
         <p class="h5 mb-4">The social network for film lovers.</p>
         <div class="list-group list-group-horizontal-md">
             <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" aria-current="true">
-                <i class="bi bi-eye"></i>
-                <p class="mb-1 ms-3 text-start">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id mi convallis</p>
-            </div>
-            <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" aria-current="true">
-                <i class="bi bi-bookmark-heart"></i>
-                <p class="mb-1 ms-3 text-start">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id mi convallis</p>
-            </div>
-            <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" aria-current="true">
                 <i class="bi bi-star"></i>
-                <p class="mb-1 ms-3 text-start">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id mi convallis</p>
+                <p class="mb-1 ms-3 text-start">Create a watchlist to remember the movies you want to see</p>
+            </div>
+            <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" aria-current="true">
+                <i class="bi bi-eye"></i>
+                <p class="mb-1 ms-3 text-start">Keep a record of every movie you've ever seen (or simply begin on the day you join)</p>
+            </div>
+            <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" aria-current="true">
+                <i class="bi bi-heart"></i>
+                <p class="mb-1 ms-3 text-start">Give your favorite movies some love by clicking "like"</p>
             </div>
           </div>
+
     </div>
 {% endblock %}

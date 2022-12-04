@@ -5,8 +5,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 
-# Two types can be used
-def lookup(type, title):
+# Two types can be used to search by movie title
+def lookup_title(type, title):
     # Display a list of all movies with the same title
     if type == 'list':
         try:
@@ -38,3 +38,18 @@ def lookup(type, title):
             return None
 
 
+# Lookup movie by id
+def lookup_id(movie_id):
+    # movie_id = int(movie_id)
+    try:
+        response_raw = requests.get(f"http://www.omdbapi.com/?apikey={API_KEY}&i={movie_id}")
+        
+        response_raw.raise_for_status()
+    except requests.exceptions.RequestException:
+        return None
+    try:
+        response = response_raw.json()
+        return response
+
+    except requests.exceptions.JSONDecodeError:
+        return None

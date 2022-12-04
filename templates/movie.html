@@ -13,7 +13,11 @@
     {% if movie['Response'] == "True" %}
     <div class="row">
         <div class="col-sm-4 d-flex flex-column align-items-center" id="poster-col">
-            <img src="{{ movie['Poster'] }}" class="img-thumbnail" alt="movie-poster">
+            {% if movie['Poster'] == 'N/A' %}
+              <img src="https://www.altavod.com/assets/images/poster-placeholder.png" style="max-width: 310px; background-size: cover" class="card-img-top" alt="movie-poster-placeholder">
+            {% else %}
+              <img src="{{ movie['Poster'] }}" class="img-thumbnail" alt="movie-poster">
+            {% endif %}
             {% if current_user.is_authenticated %}
                 <div class="container-fluid mx-auto d-flex justify-content-evenly flex-wrap mt-3" id="interactions" data-filmid="{{ movie['imdbID'] }}">
                     <span>

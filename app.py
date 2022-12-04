@@ -8,7 +8,7 @@ from forms import RegisterForm, LoginForm, SearchForm
 
 # Helper .py files
 from settings import API_KEY
-from helper import lookup
+from helper import lookup_title, lookup_id
 
 app = Flask(__name__)
 
@@ -78,7 +78,7 @@ def layout():
 # Homepage
 @app.route('/')
 def index():
-    movie = lookup("search", 'Batman')
+    movie = lookup_title("search", 'Batman')
     return render_template('index.html', movie=movie)
 
 
@@ -88,7 +88,7 @@ def list():
     form = SearchForm()
     if form.validate_on_submit():
         title = form.searched.data
-        movies = lookup("list", title)
+        movies = lookup_title("list", title)
         return render_template("list.html", form_searched=form, movies=movies, title=title)
 
     # Else search is not successful
@@ -99,7 +99,7 @@ def list():
 # Unique page for each movie
 @app.route('/movie/<title>')
 def search(title):
-    movie = lookup('search', title)
+    movie = lookup_title('search', title)
     watchlist = 0
     watched = 0
     liked = 0
@@ -122,7 +122,7 @@ def process_interaction():
     if request.method == 'POST':
         client_data = request.get_json()
         
-        # Get movie id
+        # Get movie title
         movie_id = client_data['movie_id']
   
         # Get interaction type (watchlist, watched, liked) based on the key from client_data
@@ -140,7 +140,7 @@ def process_interaction():
                 interaction.watchlist = client_data['watchlist']
             elif interaction_type[0] == 'watched':
                 interaction.watched = client_data['watched']
-                # Delete the movie id from watchlist once watched is on
+                # Delete the movie title from watchlist once watched is on
                 # interaction.watchlist = 0
             elif interaction_type[0] == 'liked':
                 interaction.liked = client_data['liked']
@@ -167,6 +167,52 @@ def process_interaction():
         return 'Success'
     
     return None
+
+
+# Account watchlist page
+@app.route('/profile/')
+def profile():
+    # Get movie_ids on watchlist list from db
+    watchlist_list_ids = MovieInteraction.query.with_entities(MovieInteraction.movie_id).filter_by(user_id=current_user.id, watchlist=1).all()
+
+    watchlist_list = []
+
+    # Use the movie titles from watchlist_list to get info
+    for i in range(len(watchlist_list_ids)):
+        for id in watchlist_list_ids[i]:
+            watchlist_list.append(lookup_id(id))
+    
+
+    watched_list_ids = MovieInteraction.query.with_entities(MovieInteraction.movie_id).filter_by(user_id=current_user.id, watched=1).all()
+
+    if watched_list_ids is not None:
+        watched_list = []
+
+        # Use the movie titles from watched_list to get info
+        for i in range(len(watched_list_ids)):
+            for id in watched_list_ids[i]:
+                watched_list.append(lookup_id(id))
+    else:
+         watched_list = 0
+
+
+    
+    # Get movies on liked list from db
+    liked_list_ids = MovieInteraction.query.with_entities(MovieInteraction.movie_id).filter_by(user_id=current_user.id, liked=1).all()
+
+    if liked_list_ids is not None:
+        liked_list = []
+
+        # Use the movie titles from liked_list to get info
+        for i in range(len(liked_list_ids)):
+            for id in liked_list_ids[i]:
+                liked_list.append(lookup_id(id))
+    else:
+        liked_list = 0
+
+
+    return render_template('profile.html', watchlist_list=watchlist_list, watchlist_length=len(watchlist_list),  watched_list=watched_list, watched_list_length=len(watched_list), liked_list=liked_list, liked_list_length=len(liked_list))
+
 
 
 # Register page
