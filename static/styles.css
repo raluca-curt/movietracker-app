@@ -58,7 +58,6 @@ a.nav-link:active {
 }
 
 .navbar {
-    padding-top: 1rem;
     background-color: transparent;
 }
 
@@ -103,7 +102,7 @@ a.nav-link:active {
     background: url('/static/images/4.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    box-shadow: 0 -10rem 25rem 16rem var(--primary-bg-color) inset;
+    box-shadow: 0 -8rem 25rem 16rem var(--primary-bg-color) inset;
     z-index: -1;
 }
 
@@ -206,7 +205,11 @@ i {
     background-color: var(--primary-accent-color);
     border-radius: .2rem;
     padding: .3rem .5rem;
+    color: var(--primary-text-color);
+}
 
+#login-message:hover {
+    cursor: pointer;
 }
 
 #poster-col a {

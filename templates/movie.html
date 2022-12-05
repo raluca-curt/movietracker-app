@@ -44,13 +44,13 @@
                 </div>
             {% else %} 
                 <div class="container-fluid mx-auto d-flex justify-content-evenly flex-wrap mt-3">
-                    <a href="{{ url_for('login') }}"><p id="login-message">Log in to review.</p></a>
+                    <a href="{{ url_for('login') }}"><p id="login-message">Log in to interact</p></a>
                 </div>
             {% endif %}
         </div>
         <div class="col-sm-8" id="content-col">
             <div class="container d-flex justify-content-start align-content-center flex-wrap" id="details">
-                <p class="h1 me-4">{{ movie['Title'] }}</p>
+                <p class="h1 me-4 text-start">{{ movie['Title'] }}</p>
                 <span class="d-flex justify-content-start align-content-center flex-wrap">
                   <p class="h5 me-4 mb-0 mt-1">{{ movie['Year'] }}</p>
                   <p class="h5 mb-0 mt-1">Directed by {{ movie['Director'] }}</p>
