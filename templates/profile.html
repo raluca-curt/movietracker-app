@@ -20,7 +20,7 @@
                         <hr>
                         <div class="container-fluid d-flex flex-row flex-wrap justify-content-start" id="cards">
                             {% for movie in watchlist_list %}
-                                <a class="card d-flex mb-4 me-1" href="{{ url_for('search', title=movie['Title']) }}" id="account-card">
+                                <a class="card d-flex mb-4 me-1" href="{{ url_for('search', movie_id=movie['imdbID']) }}" id="account-card">
                                     {% if movie['Poster'] == 'N/A' %}
                                     <img src="https://via.placeholder.com/150"  alt="movie-poster-placeholder">
                                     {% else %}
@@ -48,7 +48,7 @@
                         <hr>
                         <div class="container-fluid d-flex flex-row flex-wrap justify-content-start" id="cards">
                             {% for movie in watched_list %}
-                                <a class="card d-flex mb-4 me-1" href="{{ url_for('search', title=movie['Title']) }}" id="account-card">
+                                <a class="card d-flex mb-4 me-1" href="{{ url_for('search', movie_id=movie['imdbID']) }}" id="account-card">
                                     {% if movie['Poster'] == 'N/A' %}
                                     <img src="https://via.placeholder.com/150"  alt="movie-poster-placeholder">
                                     {% else %}
@@ -69,14 +69,14 @@
                 <div class="col p-0">
                     {% if liked_list_length > 0 %}
                         {% if liked_list_length == 1 %}
-                            <p class="h5 text-start"><i class="bi bi-heart-fill -on" id="liked"></i> You've liked {{ watched_list_length }} movie</p>
+                            <p class="h5 text-start"><i class="bi bi-heart-fill -on" id="liked"></i> You've liked {{ liked_list_length }} movie</p>
                         {% else %} 
-                            <p class="h3 text-start"><i class="bi bi-heart-fill -on" id="liked"></i> You've liked {{ watched_list_length }} movies</p>
+                            <p class="h3 text-start"><i class="bi bi-heart-fill -on" id="liked"></i> You've liked {{ liked_list_length }} movies</p>
                         {% endif %}
                         <hr>
                         <div class="container-fluid d-flex flex-row flex-wrap justify-content-start" id="cards">
                             {% for movie in liked_list %}
-                                <a class="card d-flex mb-4 me-1" href="{{ url_for('search', title=movie['Title']) }}" id="account-card">
+                                <a class="card d-flex mb-4 me-1" href="{{ url_for('search', movie_id=movie['imdbID']) }}" id="account-card">
                                     {% if movie['Poster'] == 'N/A' %}
                                     <img src="https://via.placeholder.com/150"  alt="movie-poster-placeholder">
                                     {% else %}

@@ -19,7 +19,7 @@
                     <img src="{{ movie['Poster'] }}" class="card-img-top" alt="movie-poster">
                 {% endif %}
                     <div class="card-body">
-                        <a href="{{ url_for('search', title=movie['Title']) }}"><h5 class="card-title">{{ movie['Title'] }}</h5></a>
+                        <a href="{{ url_for('search', movie_id=movie['imdbID']) }}"><h5 class="card-title">{{ movie['Title'] }}</h5></a>
                         <p class="card-text">Year: {{ movie['Year'] }}</p>
                     </div>
             </div>

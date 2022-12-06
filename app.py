@@ -78,8 +78,7 @@ def layout():
 # Homepage
 @app.route('/')
 def index():
-    movie = lookup_title("search", 'Batman')
-    return render_template('index.html', movie=movie)
+    return render_template('index.html')
 
 
 # List all movies matching the search
@@ -89,7 +88,8 @@ def list():
     if form.validate_on_submit():
         title = form.searched.data
         movies = lookup_title("list", title)
-        return render_template("list.html", form_searched=form, movies=movies, title=title)
+
+        return render_template("list.html", form_searched=form, movies=movies)
 
     # Else search is not successful
     movies = None
@@ -97,15 +97,15 @@ def list():
 
 
 # Unique page for each movie
-@app.route('/movie/<title>')
-def search(title):
-    movie = lookup_title('search', title)
+@app.route('/movie/<movie_id>')
+def search(movie_id):
+    movie = lookup_id(movie_id)
     watchlist = 0
     watched = 0
     liked = 0
+    
+    # Show the user the interaction options
     if current_user.is_authenticated:
-        movie_id = movie['imdbID']
-
         interaction = MovieInteraction.query.filter_by(user_id=current_user.id, movie_id=movie_id).first() 
         if interaction is not None:
             # Get the interaction status
