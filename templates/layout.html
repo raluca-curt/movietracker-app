@@ -37,14 +37,13 @@
                     </button>              
                     <div class="collapse navbar-collapse" id="navbar">
                             <ul class="navbar-nav me-auto my-2 align-items-center">
-                                <form action="{{ url_for('list') }}" method="post" class="d-flex me-sm-auto" id="search">
+                                <form action="{{ url_for('list') }}" method="post" class="d-flex me-auto" id="search">
                                     {{ form_searched.hidden_tag() }}
                                    <!-- Display search -->
                                     {{ form_searched.searched(class="form-control") }}
                                     
                                     <!-- Display search button -->
                                     {{ form_searched.submit_search(class="form-control") }}
-                                    <!-- <button type="submit" name="search" id="search" class="btn btn-secondary text-center ms-1 d-flex justify-content-center align-content-center" value=""><i class="bi bi-search"></i></button> -->
                                 </form>
                             </ul>
                             
