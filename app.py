@@ -231,7 +231,7 @@ def register():
         db.session.commit()
 
         # Redirect new user to login page
-        return redirect('login.html')
+        return redirect(url_for('login'))
 
     # Else only render the page
     return render_template('register.html', form=form)

@@ -14,7 +14,7 @@
         <div class="form p-5" id="container-form">
             <h3 class="mb-4">LOG IN</h3>
             <form action="" method="post">
-                {{ form.hidden_tag() }}
+                {{ form.csrf_token(id = "2") }}
 
                 <!-- Display error -->
                 {% for message in get_flashed_messages() %}
