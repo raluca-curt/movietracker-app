@@ -37,7 +37,7 @@
                     </button>              
                     <div class="collapse navbar-collapse" id="navbar">
                             <ul class="navbar-nav me-auto my-2 align-items-center">
-                                <form action="{{ url_for('list') }}" method="post" class="d-flex" id="search">
+                                <form action="{{ url_for('list') }}" method="post" class="d-flex me-sm-auto" id="search">
                                     {{ form_searched.hidden_tag() }}
                                    <!-- Display search -->
                                     {{ form_searched.searched(class="form-control") }}

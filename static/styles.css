@@ -66,13 +66,25 @@ a.nav-link:active {
     height: 2rem;
     opacity: .8;
     max-width: 9rem;
+    position: relative;
 }
 
-#search .btn {
+#submit_search {
     padding: .375rem .75rem;
     width: 2rem;
-    background-color: var(--secondary-bg-color);
-    
+    background: url(/static/images/search.svg);
+    margin-left: .1rem;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+#submit_search:hover{
+    cursor: pointer;
+}
+
+#search::after:hover {
+    cursor: pointer;
 }
 
 #search .bi {
@@ -332,8 +344,8 @@ i {
     box-shadow: none;
 }
 
-/* Account */
-#account-card {
+/* Profile */
+#profile-card {
     max-height: 9rem;
     max-width: 6rem;
     height: 100%;
@@ -343,7 +355,7 @@ i {
     font-size: 1.2rem;
 }
 
-.row p {
+.col p.h5 {
     text-transform: uppercase;
     /* font-size: 1.2rem; */
     font-weight: 300;
