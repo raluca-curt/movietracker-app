@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Watchlist
+    Profile
 {% endblock %}
     <div class="container-fluid mx-auto" id="content">
     
@@ -9,10 +9,11 @@
 {% block main %}
 <div class="container-fluid mx-auto" id="content">
         <div class="container text-start">
+            <!-- Start watchlist -->
             <div class="row mt-4">
                 <div class="col p-0">
                     {% if watchlist_length > 0 %}
-                        {% if watchlist_list_length == 1 %}
+                        {% if watchlist_length == 1 %}
                             <p class="h5 text-start"><i class="bi bi-stopwatch-fill -on" id="watchlist-icon"></i> You want to see {{ watchlist_length }} movie</p>
                         {% else %} 
                             <p class="h5 text-start"><i class="bi bi-stopwatch-fill -on" id="watchlist"></i> You want to see {{ watchlist_length }} movies</p>
@@ -33,8 +34,8 @@
                         <hr>
                     {% endif %}
                 </div>
-              </div>
-           
+            </div>
+              <!-- End watchlist -->
 
             <!-- Start watched -->
             <div class="row mt-4">
