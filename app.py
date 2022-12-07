@@ -88,7 +88,7 @@ def list():
     form = SearchForm()
     if form.validate_on_submit():
         title = form.searched.data
-        movies = lookup_title("list", title)
+        movies = lookup_title(title)
 
         return render_template("list.html", form_searched=form, movies=movies)
 
