@@ -17,8 +17,8 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 # Set up SQLite databse with SQLAlchemy
 file_path = os.path.abspath(os.getcwd())+'/users.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+file_path
-
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+file_path
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://pfxhxptnygghee:3d819044684542ddb1b80f34fecd8e5255aea08b772a09e57103a43ee0613428@ec2-3-219-52-220.compute-1.amazonaws.com:5432/dab3dmn3b7s2kc'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -35,10 +35,10 @@ login_manager.init_app(app)
 # Set up user class with details about registered users
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
-    username = db.Column(db.String(50), index=True, unique=True)
-    email = db.Column(db.String(150), index = True, unique = True)
+    username = db.Column(db.String(), index=True, unique=True)
+    email = db.Column(db.String(), index = True, unique = True)
     # Only store a password hash
-    password_hash = db.Column(db.String(150))
+    password_hash = db.Column(db.String())
 
     # Get hash for password
     def set_password(self, password):
