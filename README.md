@@ -20,7 +20,6 @@ MovieTracker allows you to look up movies and:
 - jQuery
 
 ## Installation
-
 - Fork this repository;
 - Create a virtual environment in your local directory (https://flask.palletsprojects.com/en/2.2.x/installation/#virtual-environments);
 - Get your own API KEY from [OMDB API](http://www.omdbapi.com/) and save it in an .env file. Then, follow the template in settings.py in order to set up the app to use the key;
