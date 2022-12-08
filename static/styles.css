@@ -357,7 +357,6 @@ i {
 
 .col p.h5 {
     text-transform: uppercase;
-    /* font-size: 1.2rem; */
     font-weight: 300;
     color: var(--secondary-text-color)
 }
